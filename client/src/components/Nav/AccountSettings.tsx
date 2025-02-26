@@ -32,8 +32,15 @@ function AccountSettings() {
     navigate('/admin-panel/user-management');
   };
 
+  const prompt = balanceQuery.data && Math.ceil(parseFloat(balanceQuery.data) / 340500);
 
-  
+  useEffect(() => {
+    if (prompt === 0) {
+      console.log('prompt is 0');
+    } else {
+      console.log('prompt is not 0');
+    }
+  }, [prompt, balanceQuery]);
 
   return (
     <Select.SelectProvider>
@@ -98,7 +105,7 @@ function AccountSettings() {
                 {`Balance: ${parseFloat(balanceQuery.data).toFixed(2)}`}
               </div>
               <div className="text-token-text-secondary ml-3 mr-2 py-2 text-sm" role="note">
-                {`Prompt: ${Math.ceil(parseFloat(balanceQuery.data)/340500)}`}
+                {`Prompt: ${prompt}`}
               </div>
               <DropdownMenuSeparator />
             </>

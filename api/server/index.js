@@ -118,6 +118,7 @@ const startServer = async () => {
   app.use('/api/getUsers', routes.getUsers);
   app.use('/api/deleteUser', routes.deleteUser);
   app.use('/api/editUser', routes.editUser);
+  app.use('/api/resetBalance' ,routes.resetBalance)
 
   app.use((req, res) => {
     res.set({

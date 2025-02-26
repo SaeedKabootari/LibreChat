@@ -29,6 +29,7 @@ const addBalance = require('./addBalance')
 const getUsers =require('./getUsers')
 const deleteUser = require('./deleteUser')
 const editUser = require('./editUser')
+const resetBalance = require('./resetBalance')
 
 module.exports = {
   ask,
@@ -61,5 +62,6 @@ module.exports = {
   addBalance,
   getUsers,
   deleteUser,
-  editUser
+  editUser,
+  resetBalance
 };
