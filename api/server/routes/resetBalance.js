@@ -3,6 +3,6 @@ const router = express.Router();
 const controller = require('../controllers/ResetBalanceController');
 const { requireJwtAuth } = require('../middleware/');
 
-router.put('/',  controller);
+router.put('/', requireJwtAuth, controller);
 
 module.exports = router

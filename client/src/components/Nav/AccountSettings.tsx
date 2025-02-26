@@ -13,6 +13,7 @@ import Settings from './Settings';
 import store from '~/store';
 import AdminPanelSettingsOutlinedIcon from '@mui/icons-material/AdminPanelSettingsOutlined';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function AccountSettings() {
   const localize = useLocalize();
@@ -34,9 +35,17 @@ function AccountSettings() {
 
   const prompt = balanceQuery.data && Math.ceil(parseFloat(balanceQuery.data) / 340500);
 
+  const resetBalance = async () => {
+    const res =await axios.put('/api/resetBalance', { id: user?._id });
+    console.log(res)
+  };
+
   useEffect(() => {
+    console.log(user);
+    console.log(user?._id);
     if (prompt === 0) {
       console.log('prompt is 0');
+      resetBalance();
     } else {
       console.log('prompt is not 0');
     }
@@ -92,7 +101,6 @@ function AccountSettings() {
           {user?.email ?? localize('com_nav_user')}
         </div>
         <DropdownMenuSeparator />
-
         <>
           <DropdownMenuSeparator />
         </>
