@@ -1,6 +1,6 @@
 import { useRecoilState } from 'recoil';
 import * as Select from '@ariakit/react/select';
-import { Fragment, useState, memo } from 'react';
+import { Fragment, useState, memo, useEffect } from 'react';
 import { FileText, LogOut } from 'lucide-react';
 import { useGetUserBalance, useGetStartupConfig } from 'librechat-data-provider/react-query';
 import { LinkIcon, GearIcon, DropdownMenuSeparator } from '~/components';
@@ -29,8 +29,11 @@ function AccountSettings() {
   const name = user?.avatar ?? user?.username ?? '';
 
   const adminPanelHandler = () => {
-    navigate('/admin-panel/user-management')
+    navigate('/admin-panel/user-management');
   };
+
+
+  
 
   return (
     <Select.SelectProvider>
@@ -82,6 +85,11 @@ function AccountSettings() {
           {user?.email ?? localize('com_nav_user')}
         </div>
         <DropdownMenuSeparator />
+
+        <>
+          <DropdownMenuSeparator />
+        </>
+
         {startupConfig?.checkBalance === true &&
           balanceQuery.data != null &&
           !isNaN(parseFloat(balanceQuery.data)) && (
@@ -89,9 +97,13 @@ function AccountSettings() {
               <div className="text-token-text-secondary ml-3 mr-2 py-2 text-sm" role="note">
                 {`Balance: ${parseFloat(balanceQuery.data).toFixed(2)}`}
               </div>
+              <div className="text-token-text-secondary ml-3 mr-2 py-2 text-sm" role="note">
+                {`Prompt: ${Math.ceil(parseFloat(balanceQuery.data)/340500)}`}
+              </div>
               <DropdownMenuSeparator />
             </>
           )}
+
         {user?.role === 'ADMIN' && (
           <Select.SelectItem value="" onClick={adminPanelHandler} className="select-item text-sm">
             <AdminPanelSettingsOutlinedIcon />
